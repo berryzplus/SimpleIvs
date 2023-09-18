@@ -8,6 +8,7 @@
 #define WIN32_LEAN_AND_MEAN             // Windows ヘッダーからほとんど使用されていない部分を除外する
 // Windows ヘッダー ファイル
 #include <Windows.h>
+#include <windowsx.h>
 #include <usp10.h>
 
 #include <array>

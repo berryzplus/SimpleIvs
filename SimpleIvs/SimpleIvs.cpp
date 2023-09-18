@@ -146,6 +146,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
+            // 選択中のフォントを確認する
+            const auto hGdiFont = GetStockFont(DEFAULT_GUI_FONT);
+            const auto hFont    = SelectFont(hdc, hGdiFont);
+            LOGFONT    lf       = {};
+            GetObject(hFont, sizeof(LOGFONT), &lf);
+            // フォント名はSystem
+            GetObject(hGdiFont, sizeof(LOGFONT), &lf);
+            // フォント名はMS UI Gothic
+
             // HDC を使用する描画コード
             int             x       = 0;
             int             y       = 0;
@@ -158,6 +167,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             ScriptStringAnalyse(hdc, text, count, 0, -1, SSA_GLYPHS, 0, nullptr, nullptr, nullptr, nullptr, nullptr, &ssa);
             ScriptStringOut(ssa, x, y, options, bounds, 0, count, TRUE);
             ScriptStringFree(&ssa);
+
+            SelectFont(hdc, hFont);
 
             EndPaint(hWnd, &ps);
         }
