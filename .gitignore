@@ -1,0 +1,14 @@
+﻿.vs
+Debug
+Release
+x64
+packages
+
+*.aps
+*.vcxproj.user
+
+*_h.h
+
+dlldata.c
+*_i.c
+*_p.c
