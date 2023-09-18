@@ -146,7 +146,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: HDC を使用する描画コードをここに追加してください...
+            // HDC を使用する描画コード
+            int             x       = 0;
+            int             y       = 0;
+            int             options = 0;
+            const RECT*     bounds  = nullptr;
+            constexpr auto& text    = L"\x845b飾区と\x845b\U000E0100城市";
+            const auto      count   = _countof(text) - 1;
+            ExtTextOutW(hdc, x, y, options, bounds, text, count, nullptr);
             EndPaint(hWnd, &ps);
         }
         break;
