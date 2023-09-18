@@ -152,8 +152,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             int             options = 0;
             const RECT*     bounds  = nullptr;
             constexpr auto& text    = L"\x845b飾区と\x845b\U000E0100城市";
-            const auto      count   = _countof(text) - 1;
-            ExtTextOutW(hdc, x, y, options, bounds, text, count, nullptr);
+            constexpr auto  count   = _countof(text) - 1;
+
+            SCRIPT_STRING_ANALYSIS ssa = {};
+            ScriptStringAnalyse(hdc, text, count, 0, -1, SSA_GLYPHS, 0, nullptr, nullptr, nullptr, nullptr, nullptr, &ssa);
+            ScriptStringOut(ssa, x, y, options, bounds, 0, count, TRUE);
+            ScriptStringFree(&ssa);
+
             EndPaint(hWnd, &ps);
         }
         break;
