@@ -155,6 +155,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             GetObject(hGdiFont, sizeof(LOGFONT), &lf);
             // フォント名はMS UI Gothic
 
+            // サイズ4倍のフォントを作成する
+            lf.lfHeight = -(abs(lf.lfHeight) * 4);
+            const auto hCustomFont = CreateFontIndirect(&lf);
+            SelectFont(hdc, hCustomFont);
+
             // HDC を使用する描画コード
             int             x       = 0;
             int             y       = 0;
@@ -169,6 +174,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             ScriptStringFree(&ssa);
 
             SelectFont(hdc, hFont);
+            DeleteFont(hCustomFont);
 
             EndPaint(hWnd, &ps);
         }
