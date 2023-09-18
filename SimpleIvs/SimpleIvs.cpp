@@ -168,11 +168,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             constexpr auto& text    = L"\x845b飾区と\x845b\U000E0100城市";
             constexpr auto  count   = _countof(text) - 1;
 
-            //SCRIPT_STRING_ANALYSIS ssa = {};
-            //ScriptStringAnalyse(hdc, text, count, 0, -1, SSA_GLYPHS, 0, nullptr, nullptr, nullptr, nullptr, nullptr, &ssa);
-            //ScriptStringOut(ssa, x, y, options, bounds, 0, count, TRUE);
-            //ScriptStringFree(&ssa);
-            ExtTextOutW(hdc, x, y, options, bounds, text, count, nullptr);
+            ////SCRIPT_STRING_ANALYSIS ssa = {};
+            ////ScriptStringAnalyse(hdc, text, count, 0, -1, SSA_GLYPHS, 0, nullptr, nullptr, nullptr, nullptr, nullptr, &ssa);
+            ////ScriptStringOut(ssa, x, y, options, bounds, 0, count, TRUE);
+            ////ScriptStringFree(&ssa);
+            //ExtTextOutW(hdc, x, y, options, bounds, text, count, nullptr);
+            TextOutW(hdc, x, y, text, count);
 
             SelectFont(hdc, hFont);
             DeleteFont(hCustomFont);
